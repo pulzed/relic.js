@@ -1,0 +1,35 @@
+.relic-desktop {
+	background-color: #bfc7c8;
+}
+.relic-window-body {
+	background-color: #bfc7c8;
+}
+.relic-window-body .relic-container-content {
+	background-color: #fff;
+}
+.relic-window-border,
+.relic-window-inner-border {
+	border-color: #000;
+}
+.relic-window-title {
+	background-color: #fff;
+	color: #000;
+	border-top-color: #000;
+	border-bottom-color: #000;
+	border-left-color: #fff;
+	border-right-color: #fff;
+}
+.relic-window-body.title-focused .relic-window-title {
+	color: #fff;
+	background-color: #0000a5;
+}
+.relic-window-body.border-focused .relic-window-title {
+	border-top-color: #fff;
+}
+.relic-window-body.border-focused .relic-window-border {
+	background-color: #0000a5;
+	border-color: #0000a5;
+}
+.relic-window-body.border-focused .relic-window-inner-border {
+	border-color: #fff;
+}

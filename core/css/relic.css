@@ -1,0 +1,103 @@
+.relic-desktop {
+	background-color: #bfc7c8;
+	cursor: default;
+	user-select: none;
+}
+.relic-container-body {
+	position: absolute;
+	overflow: hidden;
+}
+.relic-container-inner {
+	position: absolute;
+	overflow: hidden;
+	z-index: 5;
+}
+.relic-container-content {
+	position: absolute;
+}
+.relic-window-body {
+	background-color: #bfc7c8;
+}
+.relic-window-body .relic-container-content {
+	background-color: #fff;
+}
+.relic-window-border,
+.relic-window-inner-border {
+	position: absolute;
+	border: 1px solid #000;
+}
+.relic-window-title {
+	position: absolute;
+	height: 18px;
+	left: 0;
+	right: 0;
+	top: 3px;
+	margin: 0 auto;
+	text-align: center;
+	line-height: 18px;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: sans-serif;
+	background-color: #fff;
+	color: #000;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: clip;
+	z-index: 3;
+}
+.relic-window-corner-nw,
+.relic-window-corner-ne,
+.relic-window-corner-sw,
+.relic-window-corner-se {	
+	position: absolute;
+	width: 22px;
+	height: 22px;
+}
+.relic-window-corner-nw {
+	left: 0;
+	top: 0;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	z-index: 2;
+}
+.relic-window-corner-ne {
+	right: 0;
+	top: 0;
+	border-left: 1px solid #000;
+	border-bottom: 1px solid #000;
+	z-index: 2;
+}
+.relic-window-corner-sw {
+	left: 0;
+	bottom: 0;
+	border-top: 1px solid #000;
+	border-right: 1px solid #000;
+}
+.relic-window-corner-se {
+	right: 0;
+	bottom: 0;
+	border-top: 1px solid #000;
+	border-left: 1px solid #000;
+}
+.relic-window-body.title-focused .relic-window-title {
+	color: #fff;
+	background-color: #0000a5;
+}
+.relic-window-body.border-focused .relic-window-title {
+	border-top-color: #fff;
+}
+.relic-window-body.border-focused .relic-window-border {
+	background-color: #0000a5;
+	border-color: #0000a5;
+}
+.relic-window-body.border-focused .relic-window-corner-nw,
+.relic-window-body.border-focused .relic-window-corner-ne,
+.relic-window-body.border-focused .relic-window-corner-sw,
+.relic-window-body.border-focused .relic-window-corner-se {	
+	display: none;
+}
+.relic-window-body.border-focused .relic-window-inner-border {
+	border-color: #fff;
+}
