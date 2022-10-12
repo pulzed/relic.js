@@ -30,6 +30,35 @@ let relic = {};
 
 ////////////////////////////////////////////////////////////////////////////////////
 //
+//  Utility functions
+//
+////////////////////////////////////////////////////////////////////////////////////
+
+relic.util = {};
+
+/**
+ * Returns a number limited to a given range.
+ *
+ * @function clamp
+ * @memberof relic.util
+ * @instance
+ *
+ * @param {number} number - Input number.
+ * @param {number} min - Lower range boundary.
+ * @param {number} max - Upper range boundary.
+ *
+ * @returns {number}
+ */
+relic.util.clamp = (number, min, max) => {
+	if (number <= min)
+		return min;
+	else if (number >= max)
+		return max;
+	return number;
+};
+
+////////////////////////////////////////////////////////////////////////////////////
+//
 //  Controls
 //
 ////////////////////////////////////////////////////////////////////////////////////
@@ -74,20 +103,36 @@ relic.control.Geometry = class {
 		this._x = x;
 		this.updateSize();
 	}
+	
+	get x() {
+		return this._x;
+	}
 
 	set y(y) {
 		this._y = y;
 		this.updateSize();
+	}
+	
+	get y() {
+		return this._y;
 	}
 
 	set width(width) {
 		this._width = width;
 		this.updateSize();
 	}
+	
+	get width() {
+		return this._width;
+	}
 
 	set height(height) {
 		this._height = height;
 		this.updateSize();
+	}
+	
+	get height() {
+		return this._height;
 	}
 }
 
@@ -235,7 +280,7 @@ relic.control.Container = class extends relic.control.Element {
 	}
 }
 
-relic.control.Window = class extends relic.control.Container {
+relic.control.Window = class extends relic.control.Container {	
 	/**
 	 * Constructs a Window.
 	 *
@@ -249,6 +294,10 @@ relic.control.Window = class extends relic.control.Container {
 	 */
 	constructor(options) {
 		super(options);
+		// local variables
+		this._dragInProgress = false;
+		this._dragMouseOrigin = [0, 0];
+		this._dragWindowOrigin = [0, 0];
 		// window properties
 		this._title = options.title || '';
 		this._borderStyle = options.windowStyle || 'sizable';
@@ -283,8 +332,26 @@ relic.control.Window = class extends relic.control.Container {
 		}
 		// attach events
 		let self = this;
-		this._bodyElement.addEventListener('click', (e) => {
+		// event: focus
+		this._bodyElement.addEventListener('mousedown', (e) => {
 			self.focus();
+		});
+		// event: drag window
+		this._titleElement.addEventListener('mousedown', (e) => {
+			self._dragInProgress = true;
+			self._dragMouseOrigin = [e.clientX, e.clientY];
+			self._dragWindowOrigin = [self.x, self.y];
+		});
+		window.addEventListener('mousemove', (e) => {
+			if (self._dragInProgress === true) {
+				const dragMouseDelta = [e.clientX - self._dragMouseOrigin[0], e.clientY - self._dragMouseOrigin[1]];
+				self.x = relic.util.clamp(self._dragWindowOrigin[0] + dragMouseDelta[0], 0, window.innerWidth - self.width);
+				self.y = relic.util.clamp(self._dragWindowOrigin[1] + dragMouseDelta[1], 0, window.innerHeight - self.height);
+				
+			}
+		});
+		window.addEventListener('mouseup', (e) => {
+			self._dragInProgress = false;
 		});
 	}
 
